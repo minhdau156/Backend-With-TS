@@ -1,0 +1,10 @@
+export declare const ErrNameMustBeAtLeast2Characters: Error;
+export declare const ErrPriceMustBePositive: Error;
+export declare const ErrSalePriceMustBeNonnegative: Error;
+export declare const ErrQuantityMustBeNonnegative: Error;
+export declare const ErrBrandIdMustBeValidUUID: Error;
+export declare const ErrCategoryIdMustBeValidUUID: Error;
+export declare const ErrFromPriceMustBePositive: Error;
+export declare const ErrToPriceMustBePositive: Error;
+export declare const ErrBrandNotFound: Error;
+export declare const ErrCategoryNotFound: Error;

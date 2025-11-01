@@ -1,0 +1,11 @@
+export declare const ErrFirstNameAtLeast2Chars: Error;
+export declare const ErrLastNameAtLeast2Chars: Error;
+export declare const ErrEmailInvalid: Error;
+export declare const ErrPasswordAtLeast6Chars: Error;
+export declare const ErrBirthdayInvalid: Error;
+export declare const ErrGenderInvalid: Error;
+export declare const ErrRoleInvalid: Error;
+export declare const ErrEmailExisted: Error;
+export declare const ErrInvalidEmailAndPassword: Error;
+export declare const ErrUserInactivated: Error;
+export declare const ErrInvalidToken: Error;

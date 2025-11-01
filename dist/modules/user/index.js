@@ -1,0 +1,30 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.setupUserHexagon = void 0;
+const express_1 = require("express");
+const mysql_1 = require("./infras/repository/mysql");
+const dto_1 = require("./infras/repository/mysql/dto");
+const transport_1 = require("./infras/transport");
+const usecase_1 = require("./usecase");
+const interface_1 = require("../../share/interface");
+const setupUserHexagon = (sequelize, sctx) => {
+    (0, dto_1.init)(sequelize);
+    const repository = new mysql_1.MySQLUserRepository(sequelize, dto_1.modelName);
+    const useCase = new usecase_1.UserUseCase(repository);
+    const httpService = new transport_1.UserHTTPService(useCase);
+    const router = (0, express_1.Router)();
+    const mdlFactory = sctx.mdlFactory;
+    const adminChecker = mdlFactory.allowRoles([interface_1.UserRole.ADMIN]);
+    router.post('/register', httpService.registerAPI.bind(httpService));
+    router.post('/authenticate', httpService.loginAPI.bind(httpService));
+    router.get('/profile', httpService.profileAPI.bind(httpService));
+    router.post('/users', mdlFactory.auth, adminChecker, httpService.createAPI.bind(httpService));
+    router.get('/users/:id', httpService.getDetailAPI.bind(httpService));
+    router.get('/users', httpService.listAPI.bind(httpService));
+    router.patch('/users/:id', mdlFactory.auth, adminChecker, httpService.updateAPI.bind(httpService));
+    router.delete('/users/:id', mdlFactory.auth, adminChecker, httpService.deleteAPI.bind(httpService));
+    router.post('/rpc/introspect', httpService.introspectAPI.bind(httpService));
+    return router;
+};
+exports.setupUserHexagon = setupUserHexagon;
+//# sourceMappingURL=index.js.map
